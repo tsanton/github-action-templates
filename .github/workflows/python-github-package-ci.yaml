@@ -63,7 +63,7 @@ jobs:
           done
 
       - name: Docker compose build
-        uses: tsanton/github-action-templates/actions/docker-compose-build@docker-compose
+        uses: tsanton/github-action-templates/actions/docker-compose-build@feat/docker-compose
         with:
           compose_file_path: ${{ inputs.compose_file_path }}
           compose_file_name: ${{ inputs.compose_file_name }}
@@ -71,7 +71,7 @@ jobs:
 
       - name: Docker compose test
         if: ${{ inputs.run_test == true }}
-        uses: tsanton/github-action-templates/actions/docker-compose-test@docker-compose
+        uses: tsanton/github-action-templates/actions/docker-compose-test@feat/docker-compose
         with:
           compose_file_path: ${{ inputs.compose_file_path }}
           compose_file_name: ${{ inputs.compose_file_name }}
