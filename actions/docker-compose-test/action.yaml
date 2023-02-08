@@ -46,6 +46,7 @@ runs:
         xunit_files: ${GITHUB_WORKSPACE}/test-results/xunit/**/*.xml
 
     - name: context two
+      if: always()
       shell: bash
       run: |
         pwd
