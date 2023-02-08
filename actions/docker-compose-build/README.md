@@ -8,7 +8,7 @@ See [action.yaml](./action.yaml) file for variable explanation.
 
 ```yaml
 - name: Docker compose build
-  uses: Fremtind/pda-githubactions-commons/actions/docker-compose-build@main
+  uses: tsanton/github-action-templates/actions/docker-compose-build@main
   with:
     compose_file_name: docker-compose.yaml
     compose_file_path: ./
