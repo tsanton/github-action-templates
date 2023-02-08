@@ -57,7 +57,7 @@ runs:
       uses: irongut/CodeCoverageSummary@v1.2.0
       if: always()
       with:
-        filename: ${{GITHUB_WORKSPACE}}/test-results/coverage/coverage.xml
+        filename: ${{ github.workspace }}/test-results/coverage/coverage.xml
         format: markdown
         output: both
         badge: true
