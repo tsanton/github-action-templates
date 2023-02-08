@@ -23,6 +23,12 @@ runs:
   using: "composite"
   steps:
 
+    - name: context one
+      shell: bash
+      run: |
+        pwd
+        ls
+
     - name: Docker compose test
       shell: bash
       run: |
@@ -39,14 +45,14 @@ runs:
       with:
         xunit_files: ${GITHUB_WORKSPACE}/test-results/xunit/**/*.xml
 
-    - name: context
+    - name: context two
       shell: bash
       run: |
         pwd
         ls
-
     - name: Publish coverage results
       uses: irongut/CodeCoverageSummary@v1.2.0
+      if: always()
       with:
         filename: ${GITHUB_WORKSPACE}/test-results/coverage/coverage.xml
         format: markdown
