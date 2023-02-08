@@ -45,7 +45,7 @@ runs:
       uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
       with:
-        xunit_files: ${{ github.workspace }}/test-results/xunit/**/*.xml
+        xunit_files: ${{ github.workspace }}/test-results/xunit-reports/**/*.xml
 
     - name: context two
       if: always()
@@ -53,11 +53,14 @@ runs:
       run: |
         pwd
         ls
+        ls ./test-results
+        ls ./test-results/xunit-reports
+        ls ./test-results/coverage-reports
     - name: Publish coverage results
       uses: irongut/CodeCoverageSummary@v1.2.0
       if: always()
       with:
-        filename: ${{ github.workspace }}/test-results/coverage/coverage.xml
+        filename: ${{ github.workspace }}/test-results/coverage-reports/coverage.xml
         format: markdown
         output: both
         badge: true
