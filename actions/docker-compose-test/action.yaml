@@ -39,6 +39,12 @@ runs:
       with:
         xunit_files: ${GITHUB_WORKSPACE}/test-results/xunit/**/*.xml
 
+    - name: context
+      shell: bash
+      run: |
+        pwd
+        ls
+
     - name: Publish coverage results
       uses: irongut/CodeCoverageSummary@v1.2.0
       with:
