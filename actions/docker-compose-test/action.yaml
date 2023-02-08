@@ -22,15 +22,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-
-    - name: context one
-      shell: bash
-      run: |
-        pwd
-        ls
-        echo "${{ github.workspace }}"
-        echo "$GITHUB_WORKSPACE"
-
     - name: Docker compose test
       shell: bash
       run: |
@@ -54,13 +45,17 @@ runs:
         pwd
         ls
         ls ./test-results
+        echo "-----------next--------------"
         ls ./test-results/xunit-reports
+        echo "-----------next--------------"
         ls ./test-results/coverage-reports
+        echo "-----------next--------------"
+
     - name: Publish coverage results
-      uses: irongut/CodeCoverageSummary@v1.2.0
+      uses: irongut/CodeCoverageSummary@v1.3.0
       if: always()
       with:
-        filename: ${{ github.workspace }}/test-results/coverage-reports/coverage.xml
+        filename: ${{ github.workspace }}/test-results/coverage-reports/**.xml
         format: markdown
         output: both
         badge: true
