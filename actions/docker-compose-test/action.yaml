@@ -43,7 +43,7 @@ runs:
       shell: bash
       run: |
         pwd
-        ls
+        echo "-----------first ls--------------"
         ls ./test-results
         echo "-----------next--------------"
         ls ./test-results/xunit-reports
@@ -55,7 +55,7 @@ runs:
       uses: irongut/CodeCoverageSummary@v1.3.0
       if: always()
       with:
-        filename: ${{ github.workspace }}/test-results/coverage-reports/**.xml
+        filename: ${{ github.workspace }}/test-results/coverage-reports/coverage.xml
         format: markdown
         output: both
         badge: true
