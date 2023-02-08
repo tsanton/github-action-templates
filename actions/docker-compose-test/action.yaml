@@ -28,6 +28,8 @@ runs:
       run: |
         pwd
         ls
+        echo "${{ github.workspace }}"
+        echo "$GITHUB_WORKSPACE"
 
     - name: Docker compose test
       shell: bash
@@ -43,7 +45,7 @@ runs:
       uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
       with:
-        xunit_files: $GITHUB_WORKSPACE/test-results/xunit/**/*.xml
+        xunit_files: ${{ github.workspace }}/test-results/xunit/**/*.xml
 
     - name: context two
       if: always()
@@ -55,7 +57,7 @@ runs:
       uses: irongut/CodeCoverageSummary@v1.2.0
       if: always()
       with:
-        filename: $GITHUB_WORKSPACE/test-results/coverage/coverage.xml
+        filename: ${{GITHUB_WORKSPACE}}/test-results/coverage/coverage.xml
         format: markdown
         output: both
         badge: true
