@@ -37,12 +37,12 @@ runs:
       uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
       with:
-        xunit_files: ${{ inputs.compose_file_path }}test-results/xunit/**/*.xml
+        xunit_files: ./test-results/xunit/**/*.xml
 
     - name: Publish coverage results
       uses: irongut/CodeCoverageSummary@v1.2.0
       with:
-        filename: ${{ inputs.compose_file_path }}test-results/coverage/coverage.xml
+        filename: ./test-results/coverage/coverage.xml
         format: markdown
         output: both
         badge: true
