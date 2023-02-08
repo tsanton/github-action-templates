@@ -46,7 +46,7 @@ jobs:
     
     permissions:
       # These permissions are required to publish tests results: https://github.com/EnricoMi/publish-unit-test-result-action#permissions
-      # contents: read
+      contents: read
       issues: read
       checks: write
       pull-requests: write
