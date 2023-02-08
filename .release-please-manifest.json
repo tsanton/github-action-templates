@@ -1,1 +1,4 @@
-{"actions/docker-compose-test":"0.1.0"}
+{
+  "actions/docker-compose-test":"0.1.0",
+  "actions/docker-compose-build":"0.1.0"
+}
