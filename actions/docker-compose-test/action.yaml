@@ -1,0 +1,56 @@
+name: docker-compose-test
+description: Testing with docker-compose
+inputs:
+  compose_file_path:
+    description: The path to the compose file we're building (with trailing slash)
+    type: string
+    required: true
+
+  compose_file_name:
+    description: The name of the main compose file
+    type: string
+    required: true
+
+  test_service_name:
+    description: The name of the service to run during docker-compose run tests
+    required: true
+  
+  additional_compose_test_files:
+    description: A literal block scalar with the absolute path of additional compose files to utilize during the test step
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - name: Docker compose test
+      shell: bash
+      run: |
+        additional_compose_command=""
+        delimiter=" "
+        declare -a array=(${{ inputs.additional_compose_test_files}})
+        for element in "${array[@]}"; do additional_compose_command="$additional_compose_command -f "$element; done
+        
+        docker-compose -f ${{ inputs.compose_file_path }}${{ inputs.compose_file_name }} $additional_compose_command run --rm ${{ inputs.test_service_name }}
+
+    - name: Publish test results
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: always()
+      with:
+        xunit_files: ./test-results/xunit-reports/**/*.xml
+
+    - name: Publish coverage results
+      uses: irongut/CodeCoverageSummary@v1.3.0
+      if: always()
+      with:
+        filename: ./test-results/coverage-reports/**/*.xml
+        format: markdown
+        output: both
+        badge: true
+        fail_below_min: false
+
+    - name: Add Coverage PR Comment
+      uses: marocchino/sticky-pull-request-comment@v2
+      if: github.event_name == 'pull_request'
+      with:
+        recreate: true
+        path: code-coverage-results.md
