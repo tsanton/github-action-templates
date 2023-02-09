@@ -68,6 +68,8 @@ jobs:
           compose_file_path: ${{ inputs.compose_file_path }}
           compose_file_name: ${{ inputs.compose_file_name }}
           additional_compose_build_files: ${{ inputs.additional_compose_build_files }}
+        env:
+          ${{ secrets }}
 
       - name: Docker compose test
         if: ${{ inputs.run_test == true }}
@@ -77,3 +79,5 @@ jobs:
           compose_file_name: ${{ inputs.compose_file_name }}
           test_service_name: ${{ inputs.test_service_name }}
           additional_compose_test_files: ${{ inputs.additional_compose_test_files }}
+        env:
+          ${{ secrets }}
